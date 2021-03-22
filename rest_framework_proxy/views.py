@@ -2,8 +2,7 @@ import base64
 import json
 import requests
 
-from django.utils import six
-from django.utils.six import BytesIO as StringIO
+import six
 from requests.exceptions import ConnectionError, SSLError, Timeout
 from requests import sessions
 from django.http import HttpResponse
@@ -107,7 +106,7 @@ class ProxyView(BaseProxyView):
         Modified version of rest_framework.request.Request._parse(self)
         """
         parsers = self.get_parsers()
-        stream = StringIO(response._content)
+        stream = six.BytesIO(response._content)
         content_type = response.headers.get('content-type', None)
 
         if stream is None or content_type is None:
